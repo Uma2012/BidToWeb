@@ -75,6 +75,8 @@ namespace BidWeb.Areas.Identity.Pages.Account
 
             [Required]
             public string City { get; set; }
+            [Required]
+            public string Phonenumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -97,6 +99,7 @@ namespace BidWeb.Areas.Identity.Pages.Account
                     Street = Input.Street,
                     PostalCode = Input.PostalCode,
                     City = Input.City
+                   
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
