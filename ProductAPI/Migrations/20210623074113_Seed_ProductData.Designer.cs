@@ -9,8 +9,8 @@ using ProductAPI.Context;
 namespace ProductAPI.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20210620060321_SeedDB")]
-    partial class SeedDB
+    [Migration("20210623074113_Seed_ProductData")]
+    partial class Seed_ProductData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,7 +75,7 @@ namespace ProductAPI.Migrations
                             Id = 3,
                             BasePrice = 150.0,
                             Description = "Brio train",
-                            ImageUrl = "image/GardenTools.jpg",
+                            ImageUrl = "image/Toys.jpg",
                             IsSold = false,
                             ProductName = "Toys",
                             RemainingDays = 5
@@ -85,7 +85,7 @@ namespace ProductAPI.Migrations
                             Id = 4,
                             BasePrice = 5000.0,
                             Description = "Super powerful garden maintainer",
-                            ImageUrl = "image/Toys.jpg",
+                            ImageUrl = "image/GardenTools.jpg",
                             IsSold = false,
                             ProductName = "GardenTools",
                             RemainingDays = 2

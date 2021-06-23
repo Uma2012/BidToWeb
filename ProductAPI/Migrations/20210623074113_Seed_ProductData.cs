@@ -2,7 +2,7 @@
 
 namespace ProductAPI.Migrations
 {
-    public partial class SeedDB : Migration
+    public partial class Seed_ProductData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,8 @@ namespace ProductAPI.Migrations
                 {
                     { 1, 1000.0, "Classic style", "image/Cabinet.jpg", false, "Cabinet", 3 },
                     { 2, 2000.0, "Well maintained cycle", "image/Cycle.jpg", false, "Cycle", 1 },
-                    { 3, 150.0, "Brio train", "image/GardenTools.jpg", false, "Toys", 5 },
-                    { 4, 5000.0, "Super powerful garden maintainer", "image/Toys.jpg", false, "GardenTools", 2 },
+                    { 3, 150.0, "Brio train", "image/Toys.jpg", false, "Toys", 5 },
+                    { 4, 5000.0, "Super powerful garden maintainer", "image/GardenTools.jpg", false, "GardenTools", 2 },
                     { 5, 200.0, "Iron pan", "image/Vessel.jpg", false, "Vessels", 3 }
                 });
         }

@@ -11,7 +11,7 @@ namespace ProductAPI.Context
     {
         public ProductDbContext(DbContextOptions<ProductDbContext> options):base(options)
         {
-            base.Database.Migrate();
+           // base.Database.Migrate();
         }
 
         public DbSet<Product> Products { get; set; }
@@ -22,11 +22,11 @@ namespace ProductAPI.Context
 
             builder.Entity<Product>().HasData
             (
-                new Product() { Id = 1, ProductName = "Cabinet", Description = "Classic style", BasePrice = 1000, ImageUrl = "image/Cabinet.jpg", RemainingDays = 3 },
-                new Product() { Id = 2, ProductName = "Cycle", Description = "Well maintained cycle", BasePrice = 2000, ImageUrl = "image/Cycle.jpg", RemainingDays = 1 },
-                new Product() { Id = 3, ProductName = "Toys", Description = "Brio train", BasePrice = 150, ImageUrl = "image/GardenTools.jpg", RemainingDays = 5 },
-                new Product() { Id = 4, ProductName = "GardenTools", Description = "Super powerful garden maintainer", BasePrice = 5000, ImageUrl = "image/Toys.jpg", RemainingDays = 2 },
-                new Product() { Id = 5, ProductName = "Vessels", Description = "Iron pan", BasePrice = 200, ImageUrl = "image/Vessel.jpg", RemainingDays = 3 }
+                new Product() { Id = 1, ProductName = "Cabinet", Description = "Classic style", BasePrice = 1000, ImageUrl = "image/Cabinet.jpg", RemainingDays = 3, IsSold = false },
+                new Product() { Id = 2, ProductName = "Cycle", Description = "Well maintained cycle", BasePrice = 2000, ImageUrl = "image/Cycle.jpg", RemainingDays = 1, IsSold = false },
+                new Product() { Id = 3, ProductName = "Toys", Description = "Brio train", BasePrice = 150, ImageUrl = "image/Toys.jpg", RemainingDays = 5, IsSold = false },
+                new Product() { Id = 4, ProductName = "GardenTools", Description = "Super powerful garden maintainer", BasePrice = 5000, ImageUrl = "image/GardenTools.jpg", RemainingDays = 2, IsSold = false },
+                new Product() { Id = 5, ProductName = "Vessels", Description = "Iron pan", BasePrice = 200, ImageUrl = "image/Vessel.jpg", RemainingDays = 3, IsSold = false }
             );
 
         }

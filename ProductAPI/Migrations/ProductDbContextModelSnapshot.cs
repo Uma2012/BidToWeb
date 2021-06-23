@@ -73,7 +73,7 @@ namespace ProductAPI.Migrations
                             Id = 3,
                             BasePrice = 150.0,
                             Description = "Brio train",
-                            ImageUrl = "image/GardenTools.jpg",
+                            ImageUrl = "image/Toys.jpg",
                             IsSold = false,
                             ProductName = "Toys",
                             RemainingDays = 5
@@ -83,7 +83,7 @@ namespace ProductAPI.Migrations
                             Id = 4,
                             BasePrice = 5000.0,
                             Description = "Super powerful garden maintainer",
-                            ImageUrl = "image/Toys.jpg",
+                            ImageUrl = "image/GardenTools.jpg",
                             IsSold = false,
                             ProductName = "GardenTools",
                             RemainingDays = 2

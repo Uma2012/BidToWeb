@@ -9,8 +9,8 @@ using ProductAPI.Context;
 namespace ProductAPI.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20210620055923_InitialCreateProduct")]
-    partial class InitialCreateProduct
+    [Migration("20210623074026_Initial_Create")]
+    partial class Initial_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

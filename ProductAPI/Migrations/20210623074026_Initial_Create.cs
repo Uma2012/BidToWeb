@@ -2,7 +2,7 @@
 
 namespace ProductAPI.Migrations
 {
-    public partial class InitialCreateProduct : Migration
+    public partial class Initial_Create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
