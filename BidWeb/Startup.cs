@@ -1,5 +1,7 @@
 using BidWeb.Data;
 using BidWeb.Models;
+using BidWeb.Repository;
+using BidWeb.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +37,11 @@ namespace BidWeb
 
             services.AddDefaultIdentity<CustomUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddSingleton<IProductService, ProductService>();
+
+            services.AddHttpClient<IProductRepository, ProductRepository>(client => client.BaseAddress = new Uri(Configuration["ProductAPIUrl"]));
+
             services.AddControllersWithViews();
         }
 

@@ -1,0 +1,72 @@
+﻿@model List<Products>
+
+@if (Model == null)
+{
+    <div class="loader"></div>
+}
+else
+{
+
+    <h1>All Products</h1>
+
+    
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+
+                    <div class="col-lg-4 mb-5 d-flex justify-content-center">
+                        <div class="card shadow" style="width: 18rem;">
+
+                            <img class="card-img-top" style="height:200px;" src="@Url.Content("~/"+item.ImageUrl)" alt="@item.ProductName" />
+
+                            <div class="card-body col text-center">
+                                <h5 class="card-title">@item.ProductName</h5>
+                                <p class="card-text">@item.BasePrice.ToString("C0")</p>
+
+                               
+                                <div>
+                                    <a asp-action="" asp-controller="" asp-route-productid="" class="btn btn-success">Place Bid</a>
+                                    <a asp-action="ProductDetails" asp-controller="Products" asp-route-productid="@item.Id" class="btn btn-secondary">View Details</a>
+                                </div>
+                                <br />
+                                <br />
+                              
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+           
+
+        </div>
+    
+
+
+
+    @*<div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var product in Model)
+            {
+                <div class="col">
+                    <div class="card shadow h-100" style="min-width:18rem; max-width:30.5%">
+
+                        <img src="@Url.Content("~/"+product.ImageUrl)" class="card-img-top imageThumbnail rounded" alt="@product.ProductName">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.ProductName </h5>
+                            <p class="card-text">@product.Description</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="#" class="btn btn-primary m-1">View</a>
+
+                            <a href="#" class="btn btn-primary m-1">Edit</a>
+
+                            <a href="#" class="btn btn-danger m-1">Delete</a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>*@
+}
