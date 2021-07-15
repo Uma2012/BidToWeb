@@ -22,16 +22,17 @@ else
 
                             <div class="card-body col text-center">
                                 <h5 class="card-title">@item.ProductName</h5>
+                                
                                 <p class="card-text">@item.BasePrice.ToString("C0")</p>
 
-                               
+
                                 <div>
-                                    <a asp-action="" asp-controller="" asp-route-productid="" class="btn btn-success">Place Bid</a>
+                                    <a asp-action="GetCurrentValue" asp-controller="Bid" asp-route-productid="@item.Id" asp-route-baseprice="@item.BasePrice" asp-route-productname="@item.ProductName" class="btn btn-success">Place Bid</a>
                                     <a asp-action="ProductDetails" asp-controller="Products" asp-route-productid="@item.Id" class="btn btn-secondary">View Details</a>
                                 </div>
                                 <br />
                                 <br />
-                              
+
                             </div>
                         </div>
                     </div>
@@ -39,10 +40,10 @@ else
                 }
 
             </div>
-           
+
 
         </div>
-    
+   
 
 
 
