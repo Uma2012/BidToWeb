@@ -26,7 +26,7 @@ namespace ProductAPI.Context
                 new Product() { Id = 2, ProductName = "Cycle", Description = "Well maintained cycle", BasePrice = 2000, ImageUrl = "image/Cycle.jpg", RemainingDays = 1, IsSold = false },
                 new Product() { Id = 3, ProductName = "Toys", Description = "Brio train", BasePrice = 150, ImageUrl = "image/Toys.jpg", RemainingDays = 5, IsSold = false },
                 new Product() { Id = 4, ProductName = "GardenTools", Description = "Super powerful garden maintainer", BasePrice = 5000, ImageUrl = "image/GardenTools.jpg", RemainingDays = 2, IsSold = false },
-                new Product() { Id = 5, ProductName = "Vessels", Description = "Iron pan", BasePrice = 200, ImageUrl = "image/Vessel.jpg", RemainingDays = 3, IsSold = false }
+                new Product() { Id = 5, ProductName = "Vessel", Description = "Iron pan", BasePrice = 200, ImageUrl = "image/Vessel.jpg", RemainingDays = 3, IsSold = false }
             );
 
         }
