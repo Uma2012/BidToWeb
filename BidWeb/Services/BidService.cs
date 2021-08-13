@@ -1,4 +1,5 @@
-﻿using BidWeb.Repository;
+﻿using BidWeb.Models;
+using BidWeb.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace BidWeb.Services
         {
             this._repository = repository;
         }
+
+        public async Task CreateBidPrice(CreateBidModel createBidModel)
+        {
+             await _repository.CreateBid(createBidModel);
+        }
+
         public async Task<double> CurrentValue(int prodId)
         {
             return await _repository.CurrentValue(prodId);

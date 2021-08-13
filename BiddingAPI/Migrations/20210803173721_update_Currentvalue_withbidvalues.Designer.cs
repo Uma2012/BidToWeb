@@ -4,14 +4,16 @@ using BiddingAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BiddingAPI.Migrations
 {
     [DbContext(typeof(BiddingDbContext))]
-    partial class BiddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210803173721_update_Currentvalue_withbidvalues")]
+    partial class update_Currentvalue_withbidvalues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

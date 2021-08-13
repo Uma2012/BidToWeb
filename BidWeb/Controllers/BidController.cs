@@ -1,5 +1,7 @@
-﻿using BidWeb.Services;
+﻿using BidWeb.Models;
+using BidWeb.Services;
 using BidWeb.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,10 +13,12 @@ namespace BidWeb.Controllers
     public class BidController : Controller
     {
         private readonly IBidService _bidService;
+        private readonly UserManager<CustomUser> _userManager;
 
-        public BidController(IBidService bidService)
+        public BidController(IBidService bidService, UserManager<CustomUser> userManager)
         {
             this._bidService = bidService;
+            this._userManager = userManager;
         }
 
        [HttpGet("productid")]
@@ -26,23 +30,32 @@ namespace BidWeb.Controllers
             if (baseprice == currentValue)
             {
                 placebid.NoOfBidders = noOfBidders;
-               // ViewBag.Bidders = noOfBidders;
+              
             }
             else
             {
                 //read from db. Group the prodId from biddingTable and count it. Assign to viewBag
-            }
-
-          
+            }                     
 
             placebid.BasePrice = baseprice;
             placebid.CurrentValue = currentValue;
             placebid.ProductName = $"{productname}.jpg";
+            placebid.ProdId = productid;
             
-            //ViewBag.Current = currentValue;
-            //ViewBag.Baseprice = baseprice;
-            //ViewBag.Productname = productname;
+          
             return View(placebid);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateBid(int ProdId,string bidValue)
+        {
+            var userId = _userManager.GetUserId(User);
+            CreateBidModel createBidModel = new CreateBidModel() { UserId=Guid.Parse(userId), Prodid= ProdId, BidPrice=Convert.ToDouble(bidValue)};
+
+             await _bidService.CreateBidPrice(createBidModel);
+            ViewBag.BidValue = bidValue;
+            return View();
+        }
+
     }
 }

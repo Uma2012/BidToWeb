@@ -1,4 +1,5 @@
-﻿using BiddingAPI.Repository;
+﻿using BiddingAPI.Models;
+using BiddingAPI.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,15 +28,18 @@ namespace BiddingAPI.Controllers
           return Ok( currentValue);
     }
 
-        //public async Task<ActionResult<List<Product>>> GetProducts()
-        //{
-        //    var products = await _repository.GetAllProducts();
-        //    if (products != null && products.Any())
-        //    {
-        //        return Ok(products);
-        //    }
-        //    return NoContent();
-        //}
+    [HttpPost]
+    public ActionResult CreateBid([FromBody] CreateBidModel createBid)
+    {
+          var createIsSuccessful = _repository.CreateBid(createBid);
+            if (createIsSuccessful)
+                return Ok();
+            // return CreatedAtAction("Bid Added",createIsSuccessful);
+            else
+                return BadRequest("Bid not created");
+    }
+
+        
 
     }
 }

@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace BiddingAPI.Models
 {
-    public class Alias
+    public class CreateBidModel
     {
-        public int Id { get; set; }
-        public int ProdId { get; set; }
-        public int AliasId { get; set; }
         public Guid UserId { get; set; }
+        public double BidPrice { get; set; }
+        public int Prodid { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using BiddingAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BiddingAPI.Migrations
 {
     [DbContext(typeof(BiddingDbContext))]
-    partial class BiddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210803155406_IntialSeed_Aliases")]
+    partial class IntialSeed_Aliases
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,78 +93,6 @@ namespace BiddingAPI.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BiddingAPI.Models.BidPrice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("AliasId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("BidValue")
-                        .HasColumnType("float");
-
-                    b.Property<int>("ProdId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BidPrices");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AliasId = 1,
-                            BidValue = 500.0,
-                            ProdId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AliasId = 2,
-                            BidValue = 500.0,
-                            ProdId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AliasId = 1,
-                            BidValue = 100.0,
-                            ProdId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AliasId = 1,
-                            BidValue = 10.0,
-                            ProdId = 3
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AliasId = 1,
-                            BidValue = 200.0,
-                            ProdId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AliasId = 2,
-                            BidValue = 5.0,
-                            ProdId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AliasId = 1,
-                            BidValue = 1000.0,
-                            ProdId = 1
-                        });
-                });
-
             modelBuilder.Entity("BiddingAPI.Models.CurrentValue", b =>
                 {
                     b.Property<int>("Id")
@@ -210,48 +140,6 @@ namespace BiddingAPI.Migrations
                             Id = 5,
                             CurrentPrice = 200.0,
                             ProdId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CurrentPrice = 1500.0,
-                            ProdId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CurrentPrice = 2000.0,
-                            ProdId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CurrentPrice = 2100.0,
-                            ProdId = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CurrentPrice = 160.0,
-                            ProdId = 3
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CurrentPrice = 5200.0,
-                            ProdId = 4
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CurrentPrice = 165.0,
-                            ProdId = 3
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CurrentPrice = 3000.0,
-                            ProdId = 1
                         });
                 });
 #pragma warning restore 612, 618

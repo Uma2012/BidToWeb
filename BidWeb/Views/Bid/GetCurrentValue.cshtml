@@ -1,64 +1,71 @@
 ﻿@model BidWeb.ViewModels.PlaceBidViewModel
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center overflow-hidden rounded">
-            <div style="width:auto; height:500px">
-                <img src="@Url.Content("~/image/" + Model.ProductName)" class="rounded" style="width:auto; height:300px;" alt="@Model.ProductName">
+
+    <form method="post" asp-action="CreateBid" asp-controller="Bid">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center overflow-hidden rounded">
+                    <div style="width:auto; height:500px">
+                        <img src="@Url.Content("~/image/" + Model.ProductName)" class="rounded" style="width:auto; height:300px;" alt="@Model.ProductName">
+                        @Html.HiddenFor(x=>x.ProdId)
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 pl-sm-4">
+                    <div class="container">
+                        <table>
+
+                            <tr>
+                                <td>
+                                    <p><b> Base Price of the product &nbsp 	&nbsp   :   </b></p>
+                                </td>
+                                <td>
+                                    <p>@Model.BasePrice</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><b> Current Price of the product:</b></p>
+                                </td>
+                                <td>
+                                    <p> @Model.CurrentValue</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><b> No of bidders &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b></p>
+                                </td>
+                                <td>
+                                    <p> @Model.NoOfBidders</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><b> Your Bid Amount&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:</b></p>
+                                </td>
+                                <td>
+                                    <span>+&nbsp</span><input type="text" name="bidValue" /><span>&nbspkr</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                @*<td colspan="2" style="padding:2rem 0 0 8rem">*@
+                                    <input type="submit" value="Submit" class="btn btn-primary" asp-controller="Bid" asp-action="CreateBid" />
+                                    <input type="button" value="Back" class="btn btn-secondary" onclick="history.back()"  />
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+
+
+                    </div>
+                </div>
+
             </div>
+
+
         </div>
-
-        <div class="col-sm-12 col-md-6 pl-sm-4">
-            <div class="container">
-                <table>
-
-                    <tr>
-                        <td>
-                            <p><b> Base Price of the product    :   </b></p>
-                        </td>
-                        <td>
-                            <p>@Model.BasePrice</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><b> Current Price of the product:</b></p>
-                        </td>
-                        <td>
-                            <p> @Model.CurrentValue</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><b> No of bidders:</b></p>
-                        </td>
-                        <td>
-                            <p> @Model.NoOfBidders</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><b> Your Bid Amount:</b></p>
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="padding:2rem 0 0 8rem">
-                            <input type="submit" value="Submit" class="btn btn-primary"/>
-                        </td>
-                        
-                    </tr>
-
-                </table>
-
-
-
-            </div>
-        </div>
-    </div>
-
-
-</div>
+    </form>
 
 

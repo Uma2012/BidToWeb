@@ -4,14 +4,16 @@ using BiddingAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BiddingAPI.Migrations
 {
     [DbContext(typeof(BiddingDbContext))]
-    partial class BiddingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210803172838_IntialSeed_bidprices")]
+    partial class IntialSeed_bidprices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,48 +212,6 @@ namespace BiddingAPI.Migrations
                             Id = 5,
                             CurrentPrice = 200.0,
                             ProdId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CurrentPrice = 1500.0,
-                            ProdId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CurrentPrice = 2000.0,
-                            ProdId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CurrentPrice = 2100.0,
-                            ProdId = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CurrentPrice = 160.0,
-                            ProdId = 3
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CurrentPrice = 5200.0,
-                            ProdId = 4
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CurrentPrice = 165.0,
-                            ProdId = 3
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CurrentPrice = 3000.0,
-                            ProdId = 1
                         });
                 });
 #pragma warning restore 612, 618

@@ -11,5 +11,6 @@ namespace BidWeb.ViewModels
         public double BasePrice { get; set; }
         public int NoOfBidders { get; set; }
         public string ProductName { get; set; }
+        public int ProdId { get; set; }
     }
 }
