@@ -1,5 +1,6 @@
 ﻿using BidWeb.Models;
 using BidWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace BidWeb.Controllers
         {
             this._productService = productService;
         }
+
+        [Authorize]
         public async Task<ActionResult<List<Products>>> AllProducts()
         {
             var products = await _productService.GetAll();

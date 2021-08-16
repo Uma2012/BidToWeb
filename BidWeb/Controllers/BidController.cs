@@ -1,6 +1,7 @@
 ﻿using BidWeb.Models;
 using BidWeb.Services;
 using BidWeb.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,6 +22,7 @@ namespace BidWeb.Controllers
             this._userManager = userManager;
         }
 
+       [Authorize]
        [HttpGet("productid")]
         public async Task<ActionResult<PlaceBidViewModel>> GetCurrentValue(int productid, double baseprice, string productname)
         {
@@ -46,6 +48,7 @@ namespace BidWeb.Controllers
             return View(placebid);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> CreateBid(int ProdId,string bidValue)
         {

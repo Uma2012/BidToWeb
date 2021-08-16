@@ -22,13 +22,19 @@ else
 
                             <div class="card-body col text-center">
                                 <h5 class="card-title">@item.ProductName</h5>
-                                
+
                                 <p class="card-text">@item.BasePrice.ToString("C0")</p>
-
-
+                                <p class="card-text">Remaining days @item.RemainingDays</p>
                                 <div>
+                                    @if(item.IsSold)
+                                    {
+                                    <button type="button" class="btn btn-success" disabled>Place Bid</button>
+                                    }
+                                    else
+                                    {
                                     <a asp-action="GetCurrentValue" asp-controller="Bid" asp-route-productid="@item.Id" asp-route-baseprice="@item.BasePrice" asp-route-productname="@item.ProductName" class="btn btn-success">Place Bid</a>
                                     <a asp-action="ProductDetails" asp-controller="Products" asp-route-productid="@item.Id" class="btn btn-secondary">View Details</a>
+                                    }
                                 </div>
                                 <br />
                                 <br />
