@@ -9,5 +9,6 @@ namespace BidWeb.Services
     public interface IProductService
     {
         Task<List<Products>> GetAll();
+        Task<List<ZeroRemaningDaysProduct>> IncrementDay();
     }
 }

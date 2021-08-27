@@ -104,20 +104,20 @@ namespace BidWeb.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "99174d28-2832-4ecf-90dc-a4ea100c0ea7",
+                            Id = "46afc4f1-c22c-4f19-819e-0d454b144b22",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "062163f1-3ef9-43ba-98dd-ceb37803a1de",
+                            ConcurrencyStamp = "be298408-4275-4242-afaa-31971a3517e8",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             IsAdmin = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@admin.com",
                             NormalizedUserName = "admin@admin.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEx2TZRWgt1Pim6VhA1CdV7fGd6ApgZPYEAd0wT2rP221TdVS1yPEdpSOvm3+4Ku5g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN8cSmJ9rnag2wclhBqEIpZNv8L4Ne+Dbn+ovphkqn64GheetSAJfYIrEI0l+QRVvw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UserName = "admin@admin.com"
+                            UserName = "admin"
                         });
                 });
 

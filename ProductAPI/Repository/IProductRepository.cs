@@ -9,5 +9,7 @@ namespace ProductAPI.Repository
     public interface IProductRepository
     {
         Task<List<Product>> GetAllProducts();
+        List<ZeroRemaingDaysProduct> DayIncrementer();
+        //Task<List<Product>> ResettingDayCounter();
     }
 }

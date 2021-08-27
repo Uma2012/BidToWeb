@@ -64,7 +64,7 @@ namespace BiddingAPI.Repository
                 if (prodIdExists)
                 {
                     aliasID = _context.Aliases.Where(x => x.ProdId == createBid.Prodid).Select(a => a.AliasId).Max();
-                    aliasRow.AliasId = aliasID +1;   //check this with +1
+                    aliasRow.AliasId = aliasID +1;   
                     aliasRow.ProdId = createBid.Prodid;
                     aliasRow.UserId = createBid.UserId;
 
@@ -100,9 +100,7 @@ namespace BiddingAPI.Repository
 
                     return aliasRow.AliasId;
                 }
-
-            }
-           
+            }           
 
         }
 
@@ -117,7 +115,7 @@ namespace BiddingAPI.Repository
                 _context.BidPrices.Add(bidPrice);
                  _context.SaveChanges();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return false;
             }
@@ -156,8 +154,9 @@ namespace BiddingAPI.Repository
                 return true;
         }
 
-        public  double GetCurrentValueOfProduct(int prodId)
+        public  PlacebidModel GetCurrentValueOfProduct(int prodId)
         {
+            PlacebidModel placebidModel = new PlacebidModel();
             var isProdIdExists = _context.Currentvalue.Any(x => x.ProdId == prodId);
             if (isProdIdExists)
             {
@@ -177,18 +176,84 @@ namespace BiddingAPI.Repository
                                                 .Select(s => new
                                                 {
                                                     PRODID = s.Key,
-                                                    Maxi = s.Max(m => m.CurrentPrice)
+                                                    Maxi = s.Max(m => m.CurrentPrice)                                                    
                                                 })
                                                 .Where(y=>y.PRODID==prodId).FirstOrDefault();
-                var requiredCurrentValue = query.Maxi;
 
-                return requiredCurrentValue;
+                //var bidder = _context.Currentvalue.Where(p => p.ProdId == prodId).Count();
+                var isBidderExsits = _context.Aliases.Any(x => x.ProdId == prodId);
+                if (isBidderExsits)
+                {
+                    placebidModel.NoOfBidders = _context.Aliases.Where(p => p.ProdId == prodId).Count();
+                   
+                }
+                else
+                {
+                    placebidModel.NoOfBidders = 0;
+                }
+
+                
+
+                placebidModel.CurrentValue = query.Maxi;
+              
+
+                return placebidModel;
 
             }
 
-            return 0;
+            return null;
         }
 
-       
+        public OrderCreationModel ValuesNeededForOrderCreation(int prodId)
+        {
+            OrderCreationModel orderCreationModel = new OrderCreationModel();
+            try
+            {                
+                var maxIdOfProd = _context.BidPrices
+                            .GroupBy(p => p.ProdId)
+                            .Select(s =>new 
+                            {
+                                ProdId=s.Key,
+                                Id=s.Max(i=>i.Id)
+                            })
+                            .Where(y => y.ProdId == prodId)
+                            .FirstOrDefault();
+
+                
+                var aliasId = _context.BidPrices.Where(i => i.Id == maxIdOfProd.Id).Select(a => a.AliasId).FirstOrDefault();             
+
+                var userId = _context.Aliases.Where(a => a.AliasId == aliasId && a.ProdId == prodId).Select(u => u.UserId).FirstOrDefault();
+
+              
+               var maxIdofCurrentValue = _context.Currentvalue.GroupBy(s => s.ProdId)
+                                                        .Select(s => new
+                                                              {
+                                                                PRODID = s.Key,
+                                                                ID = s.Max(m => m.Id)
+                                                               })
+                                                        .Where(y => y.PRODID == prodId)
+                                                        .FirstOrDefault();
+
+                var currentValue = _context.Currentvalue.Where(i => i.Id == maxIdofCurrentValue.ID).Select(m => m.CurrentPrice).FirstOrDefault();
+
+                orderCreationModel.UserId = userId;
+                orderCreationModel.ValueOfProduct = currentValue;
+            }
+            catch(Exception)
+            {
+                return null;
+            }
+            
+            return orderCreationModel;
+        }
+
+        public List<BidPrice> GetBidValues(int prodId)
+        {
+            var output = new List<BidPriceWithAlias>();
+            var query = _context.BidPrices.Where(p => p.ProdId == prodId).ToList();
+
+            
+            return query;
+        }
     }
 }

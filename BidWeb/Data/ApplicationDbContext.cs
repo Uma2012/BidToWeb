@@ -22,7 +22,7 @@ namespace BidWeb.Data
             modelBuilder.Entity<CustomUser>().HasData(new CustomUser
             {
                 Id = ADMIN_ID,
-                UserName = "admin@admin.com",
+                UserName = "admin",
                 NormalizedUserName = "admin@admin.com",
                 Email = "admin@admin.com",
                 NormalizedEmail = "admin@admin.com",

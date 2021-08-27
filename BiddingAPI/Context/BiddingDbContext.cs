@@ -44,8 +44,8 @@ namespace BiddingAPI.Context
                 new Alias { Id = 3, ProdId = 2, AliasId = 1, UserId = new Guid("facab1fe-5e83-4301-bd85-015ede8c9458") },
                 new Alias { Id = 4, ProdId = 3, AliasId = 1, UserId = new Guid("0933a144-762a-4290-af1a-435e19511232") },
                 new Alias { Id = 5, ProdId = 4, AliasId = 1, UserId = new Guid("facab1fe-5e83-4301-bd85-015ede8c9458") },
-                new Alias { Id = 6, ProdId = 3, AliasId = 2, UserId = new Guid("0c278933-2e38-4e0a-ae31-c26b6769c869") },
-                new Alias { Id = 7, ProdId = 1, AliasId = 1, UserId = new Guid("facab1fe-5e83-4301-bd85-015ede8c9458") }
+                new Alias { Id = 6, ProdId = 3, AliasId = 2, UserId = new Guid("0c278933-2e38-4e0a-ae31-c26b6769c869") }
+                //new Alias { Id = 7, ProdId = 1, AliasId = 1, UserId = new Guid("facab1fe-5e83-4301-bd85-015ede8c9458") }
 
              );
 

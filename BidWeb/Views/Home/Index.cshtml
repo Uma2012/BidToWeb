@@ -8,8 +8,8 @@
     <div style="padding:15rem;">
         @if (User.Identity.IsAuthenticated)
         {
-            <a asp-action="AllProducts" asp-controller="Product" class="btn btn-primary" onclick="showLoader(this)">See products</a>            
-
+            <a asp-action="AllProducts" asp-controller="Product" class="btn btn-primary" onclick="showLoader(this)">See products</a>
+          
         }
 
         else

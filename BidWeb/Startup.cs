@@ -42,9 +42,14 @@ namespace BidWeb
 
             services.AddSingleton<IBidService, BidService>();
 
+            services.AddSingleton<IOrderService, OrderService>();
+
             services.AddHttpClient<IProductRepository, ProductRepository>(client => client.BaseAddress = new Uri(Configuration["ProductAPIURL"]));
 
             services.AddHttpClient<IBidRepository, BidRepository>(client => client.BaseAddress = new Uri(Configuration["BiddingAPIURL"]));
+
+            services.AddHttpClient<IOrderRepository, OrderRepository>(client => client.BaseAddress = new Uri(Configuration["OrderAPIURL"]));
+
 
             services.AddControllersWithViews();
         }

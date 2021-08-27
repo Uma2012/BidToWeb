@@ -81,13 +81,6 @@ namespace BiddingAPI.Migrations
                             AliasId = 2,
                             ProdId = 3,
                             UserId = new Guid("0c278933-2e38-4e0a-ae31-c26b6769c869")
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AliasId = 1,
-                            ProdId = 1,
-                            UserId = new Guid("facab1fe-5e83-4301-bd85-015ede8c9458")
                         });
                 });
 

@@ -18,10 +18,18 @@ namespace BidWeb.Repository
         }
         public async Task<List<Products>> GetAll()
         {
-            var response = await _httpClient.GetAsync("/api/product");
+            var response = await _httpClient.GetAsync("/api/product/GetProducts");
             var productResponse = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<List<Products>>(productResponse);
+        }
+
+        public async Task<List<ZeroRemaningDaysProduct>> IncrementDay()
+        {
+            var response = await _httpClient.GetAsync("/api/product/IncrementDayCounter");
+            var productResponse = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<List<ZeroRemaningDaysProduct>>(productResponse);
         }
     }
 }

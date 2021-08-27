@@ -1,5 +1,6 @@
 ﻿using BidWeb.Models;
 using BidWeb.Repository;
+using BidWeb.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,24 @@ namespace BidWeb.Services
             this._repository = repository;
         }
 
+        public async Task<List<BidPrices>> BidValues(int prodId)
+        {
+            return await _repository.BidValues(prodId);
+        }
+
         public async Task CreateBidPrice(CreateBidModel createBidModel)
         {
              await _repository.CreateBid(createBidModel);
         }
 
-        public async Task<double> CurrentValue(int prodId)
+        public async Task<PlaceBidViewModel> CurrentValue(int prodId)
         {
             return await _repository.CurrentValue(prodId);
+        }
+
+        public async Task<OrderCreationModel> OrderCreationValues(int prodId)
+        {
+            return await _repository.OrderCreationValues(prodId);
         }
     }
 }

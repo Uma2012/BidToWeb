@@ -8,7 +8,9 @@ namespace BiddingAPI.Repository
 {
     public interface IBidRepository
     {
-        double GetCurrentValueOfProduct(int prodId);
+        PlacebidModel GetCurrentValueOfProduct(int prodId);
         bool CreateBid(CreateBidModel createBid);
+        OrderCreationModel ValuesNeededForOrderCreation(int prodId);
+        List<BidPrice> GetBidValues(int prodId);
     }
 }

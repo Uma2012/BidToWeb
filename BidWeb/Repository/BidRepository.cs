@@ -1,4 +1,5 @@
 ﻿using BidWeb.Models;
+using BidWeb.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,15 @@ namespace BidWeb.Repository
             this._httpClient = httpClient;
         }
 
+        public async Task<List<BidPrices>> BidValues(int prodId)
+        {
+            var request = await _httpClient.GetAsync("/api/bidding/GetBidPrices?prodId=" + prodId);
+            var response = await request.Content.ReadAsStringAsync();
+
+            var output = JsonConvert.DeserializeObject<List<BidPrices>>(response);
+            return output;
+        }
+
         public async Task CreateBid(CreateBidModel createBidModel)
         {
             JsonSerializerOptions options = new(JsonSerializerDefaults.Web)
@@ -32,12 +42,21 @@ namespace BidWeb.Repository
             
         }
 
-        public async Task<double> CurrentValue(int prodId)
+        public async Task<PlaceBidViewModel> CurrentValue(int prodId)
         {
             var request = await _httpClient.GetAsync("/api/bidding/GetCurrentValue?prodId="+ prodId);
             var productResponse = await request.Content.ReadAsStringAsync();
            
-           var output= JsonConvert.DeserializeObject<double>(productResponse);
+           var output= JsonConvert.DeserializeObject<PlaceBidViewModel>(productResponse);
+            return output;
+        }
+
+        public async Task<OrderCreationModel> OrderCreationValues(int prodId)
+        {
+            var request = await _httpClient.GetAsync("/api/bidding/GetOrderCreationValues?id=" + prodId);
+            var productResponse = await request.Content.ReadAsStringAsync();
+
+            var output = JsonConvert.DeserializeObject<OrderCreationModel>(productResponse);
             return output;
         }
     }

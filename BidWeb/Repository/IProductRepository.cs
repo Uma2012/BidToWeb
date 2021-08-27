@@ -9,5 +9,6 @@ namespace BidWeb.Repository
     public interface IProductRepository
     {
         Task<List<Products>> GetAll();
+        Task<List<ZeroRemaningDaysProduct>> IncrementDay();
     }
 }

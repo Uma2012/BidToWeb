@@ -14,5 +14,8 @@ namespace BidWeb.Models
         public string ImageUrl { get; set; }
         public string Description { get; set; }
         public bool IsSold { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+        public DateTime TodaysDate { get; set; }
     }
 }

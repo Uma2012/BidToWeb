@@ -19,5 +19,10 @@ namespace BidWeb.Services
         {
             return await _repository.GetAll();
         }
+
+        public async Task<List<ZeroRemaningDaysProduct>> IncrementDay()
+        {
+            return await _repository.IncrementDay();
+        }
     }
 }

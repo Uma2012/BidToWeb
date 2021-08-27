@@ -27,23 +27,14 @@ namespace BidWeb.Controllers
         public async Task<ActionResult<PlaceBidViewModel>> GetCurrentValue(int productid, double baseprice, string productname)
         {
             var placebid = new PlaceBidViewModel();
-            var currentValue =await _bidService.CurrentValue(productid);
-            var noOfBidders = 0;
-            if (baseprice == currentValue)
-            {
-                placebid.NoOfBidders = noOfBidders;
-              
-            }
-            else
-            {
-                //read from db. Group the prodId from biddingTable and count it. Assign to viewBag
-            }                     
+
+            var output =await _bidService.CurrentValue(productid);                            
 
             placebid.BasePrice = baseprice;
-            placebid.CurrentValue = currentValue;
+            placebid.CurrentValue = output.CurrentValue;
+            placebid.NoOfBidders = output.NoOfBidders;
             placebid.ProductName = $"{productname}.jpg";
-            placebid.ProdId = productid;
-            
+            placebid.ProdId = productid;            
           
             return View(placebid);
         }
@@ -58,6 +49,15 @@ namespace BidWeb.Controllers
              await _bidService.CreateBidPrice(createBidModel);
             ViewBag.BidValue = bidValue;
             return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<List<BidPrices>>> GetBidValues(int id)
+        {
+            var response =await _bidService.BidValues(id);            
+
+            return View(response);
         }
 
     }

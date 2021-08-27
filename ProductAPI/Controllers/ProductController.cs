@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProductAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -19,6 +19,7 @@ namespace ProductAPI.Controllers
         {
             this._repository = repository;
         }
+
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts()
         {
@@ -29,5 +30,17 @@ namespace ProductAPI.Controllers
             }
             return NoContent();
         }
+
+        [HttpGet]
+        public ActionResult<List<ZeroRemaingDaysProduct>> IncrementDayCounter()
+        {
+            var products =  _repository.DayIncrementer();
+            if (products != null && products.Any())
+            {
+                return Ok(products);
+            }
+            return null;
+        }
+
     }
 }

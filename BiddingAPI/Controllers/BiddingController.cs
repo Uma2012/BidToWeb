@@ -22,10 +22,10 @@ namespace BiddingAPI.Controllers
 
 
     [HttpGet]
-    public ActionResult<double> GetCurrentValue(int prodId)
+    public ActionResult<PlacebidModel> GetCurrentValue(int prodId)
     {
-          var currentValue = _repository.GetCurrentValueOfProduct(prodId);
-          return Ok( currentValue);
+          var placebidValues = _repository.GetCurrentValueOfProduct(prodId);
+          return Ok( placebidValues);
     }
 
     [HttpPost]
@@ -37,9 +37,30 @@ namespace BiddingAPI.Controllers
             // return CreatedAtAction("Bid Added",createIsSuccessful);
             else
                 return BadRequest("Bid not created");
-    }
-
+    }   
         
+    [HttpGet]
+    public ActionResult<OrderCreationModel> GetOrderCreationValues(int id)
+    {
+            var orderCreationValues = _repository.ValuesNeededForOrderCreation(id);
+            if (orderCreationValues != null)
+                return Ok(orderCreationValues);
+            else
+                return BadRequest();
 
     }
+
+    [HttpGet]
+    public ActionResult<List<BidPrice>> GetBidPrices(int prodId)
+    {
+            var bidValues = _repository.GetBidValues(prodId);
+            if (bidValues != null)
+                return Ok(bidValues);
+            else
+                return BadRequest();
+
+    }
+
+    }
+    
 }
