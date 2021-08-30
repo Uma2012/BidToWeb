@@ -10,7 +10,8 @@ namespace BidWeb.ViewModels
         public double CurrentValue { get; set; }
         public double BasePrice { get; set; }
         public int NoOfBidders { get; set; }
-        public string ProductName { get; set; }
+        public string ImageURL { get; set; }
         public int ProdId { get; set; }
+        public string ProdName { get; set; }
     }
 }

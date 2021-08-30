@@ -112,6 +112,7 @@ namespace BidWeb.Controllers
             }
            
             product.ImageUrl = filename;
+            product.CreatedDate = DateTime.Now;
             product.ExpiryDate = product.CreatedDate.AddDays(5);
             product.RemainingDays = 5;
             product.TodaysDate = DateTime.Now;

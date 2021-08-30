@@ -32,10 +32,10 @@ namespace BidWeb.Controllers
 
             placebid.BasePrice = baseprice;
             placebid.CurrentValue = output.CurrentValue;
-            placebid.NoOfBidders = output.NoOfBidders;
-            //placebid.ProductName = $"{productname}.jpg";
-            placebid.ProductName = img;
-            placebid.ProdId = productid;            
+            placebid.NoOfBidders = output.NoOfBidders;            
+            placebid.ImageURL = img;
+            placebid.ProdId = productid;
+            placebid.ProdName = productname;
           
             return View(placebid);
         }
