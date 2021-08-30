@@ -1,10 +1,13 @@
 ﻿using BidWeb.Models;
 using BidWeb.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,13 +19,19 @@ namespace BidWeb.Controllers
         private readonly IBidService _bidService;
         private readonly IOrderService _orderService;
         private readonly UserManager<CustomUser> _usermanager;
+        private  IWebHostEnvironment _hostEnvironment { get; }
 
-        public ProductController(IProductService productService, IBidService bidService, IOrderService orderService, UserManager<CustomUser> usermanager)
+        public ProductController(IProductService productService, 
+                                    IBidService bidService, 
+                                    IOrderService orderService,
+                                    UserManager<CustomUser> usermanager,
+                                    IWebHostEnvironment hostEnvironment)
         {
             this._productService = productService;
             this._bidService = bidService;
             this._orderService = orderService;
             this._usermanager = usermanager;
+            _hostEnvironment = hostEnvironment;
         }
 
         [Authorize]
@@ -70,14 +79,54 @@ namespace BidWeb.Controllers
                 if (temp1==0.0)
                 {
                     TempData["Error"] = $"Order not created. No bidders for product \"{temp2}\"";
-                }                
-
+                }               
             }
 
-             return RedirectToAction("AllProducts", "Product");
-           
+             return RedirectToAction("AllProducts", "Product");           
         }
-       
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult CreateProduct()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> CreateProduct(IFormFile file, Products product)
+        {            
+            var webRootPath = _hostEnvironment.WebRootPath;
+            var folderName = @"image\";
+            var newPath = Path.Combine(webRootPath, folderName);
+            //var extention = file.ContentType.Split("/"[1]);
+            var selectedfile = file.FileName;
+            var filename = @"image/" + file.FileName;
+            var fullPath = Path.Combine(newPath, selectedfile);
+            if(file!=null)
+            {
+                using (FileStream stream=new FileStream(fullPath,FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+            }
+           
+            product.ImageUrl = filename;
+            product.ExpiryDate = product.CreatedDate.AddDays(5);
+            product.RemainingDays = 5;
+            product.TodaysDate = DateTime.Now;
+            var createdproductId = await _productService.CreateProduct(product);
+            var currenValue = new CurrentValue()
+            {
+                CurrentPrice = product.BasePrice,
+                ProdId=createdproductId
+
+            };
+            var createCurrentPrice = await _bidService.CreateCurrentValue(currenValue);
+            
+
+            return RedirectToAction("AllProducts", "Product");
+        }
 
     }
 }

@@ -12,5 +12,6 @@ namespace BiddingAPI.Repository
         bool CreateBid(CreateBidModel createBid);
         OrderCreationModel ValuesNeededForOrderCreation(int prodId);
         List<BidPrice> GetBidValues(int prodId);
+        bool CreateCurrentValue(CurrentValue value);
     }
 }

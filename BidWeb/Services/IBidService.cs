@@ -10,8 +10,9 @@ namespace BidWeb.Services
     public interface IBidService
     {
         Task<PlaceBidViewModel> CurrentValue(int prodId);
-        Task CreateBidPrice(CreateBidModel createBidModel);
+        Task<string> CreateBidPrice(CreateBidModel createBidModel);
         Task<OrderCreationModel> OrderCreationValues(int prodId);
         Task<List<BidPrices>> BidValues(int prodId);
+        Task<string> CreateCurrentValue(CurrentValue value);
     }
 }

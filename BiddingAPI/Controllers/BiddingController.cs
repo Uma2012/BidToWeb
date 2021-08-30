@@ -29,12 +29,23 @@ namespace BiddingAPI.Controllers
     }
 
     [HttpPost]
+    public ActionResult CreateCurrentValue(CurrentValue value)
+    {
+            var isCreated = _repository.CreateCurrentValue(value);
+            if (isCreated)
+                return Ok();
+            else
+                return BadRequest();
+        }
+
+
+
+        [HttpPost]
     public ActionResult CreateBid([FromBody] CreateBidModel createBid)
     {
           var createIsSuccessful = _repository.CreateBid(createBid);
             if (createIsSuccessful)
-                return Ok();
-            // return CreatedAtAction("Bid Added",createIsSuccessful);
+                return Ok();           
             else
                 return BadRequest("Bid not created");
     }   

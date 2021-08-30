@@ -15,6 +15,12 @@ namespace BidWeb.Services
         {
             this._repository = repository;
         }
+
+        public async Task<int> CreateProduct(Products product)
+        {
+            return await _repository.CreateProduct(product);
+        }
+
         public async Task<List<Products>> GetAll()
         {
             return await _repository.GetAll();

@@ -5,7 +5,9 @@
         <div class="row">
             <div class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center overflow-hidden rounded">
                 <div style="width:auto; height:500px">
-                    <img src="@Url.Content("~/image/" + Model.ProductName)" class="rounded" style="width:auto; height:300px;" alt="@Model.ProductName">
+                    @*<img src="@Url.Content("~/image/" + Model.ProductName)" class="rounded" style="width:auto; height:300px;" alt="@Model.ProductName">*@
+                    <img src="@Url.Content("~/"+Model.ProductName)" class="rounded" style="width:auto; height:300px;" alt="@Model.ProductName">
+
                     @Html.HiddenFor(x => x.ProdId)
                 </div>
             </div>

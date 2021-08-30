@@ -17,6 +17,22 @@ namespace ProductAPI.Repository
             this._context = context;
         }
 
+        public Product Create(Product product)
+        {
+            try 
+            {
+                _context.Products.Add(product);
+                 _context.SaveChanges();              
+            }
+            catch(Exception e)
+            {
+                var x = e.Message;
+                return null;
+            }
+            return product;
+
+        }
+
         public List<ZeroRemaingDaysProduct> DayIncrementer()
         {
             var output = new List<ZeroRemaingDaysProduct>();
@@ -42,31 +58,20 @@ namespace ProductAPI.Repository
                         products.Add(product);
                         _context.Entry(product).State = EntityState.Modified;
                         _context.SaveChanges();
-                    }
-                    //_context.Products.Add(product);
-                    //_context.SaveChanges();
-                }
-
-                //_context.Products.AddRange(products);
-                // _context.SaveChanges();
+                    }                   
+                }                
 
                 productEntity =  _context.Products.ToList();
 
-
                 foreach (var product in productEntity)
-                {
-                    //var remainingDays = product.TodaysDate.Subtract(product.CreatedDate);
-
-                    //product.RemainingDays = remainingDays.Days;
+                {                    
 
                     if (product.RemainingDays == 0 && !product.IsSold)
                     {
                         temp.ProdId = product.Id;
                         temp.ProductName = product.ProductName;
                         output.Add(temp);
-
-                        //var query = _context.Products.Where(x => x.Id == product.Id).FirstOrDefault();
-                        //query.IsSold = true;
+                        
                         product.IsSold = true;
 
                         _context.Entry(product).State = EntityState.Modified;
@@ -75,13 +80,10 @@ namespace ProductAPI.Repository
                 }
 
             }
-            catch (Exception e)
-            {
-               var x= e.Message;
+            catch (Exception)
+            {              
                 return null;
-            }
-           
-
+            }          
 
             return output;
         }
@@ -90,11 +92,6 @@ namespace ProductAPI.Repository
         {
             return await _context.Products.ToListAsync();
         }
-
-        //public async Task<List<Product>> ResettingDayCounter()
-        //{
-        //    //reset todaysdate fielt to datetime.now
-        //    throw new NotImplementedException();
-        //}
+        
     }
 }

@@ -30,16 +30,26 @@ namespace BidWeb.Repository
             return output;
         }
 
-        public async Task CreateBid(CreateBidModel createBidModel)
+        public async Task<string> CreateBid(CreateBidModel createBidModel)
         {
             JsonSerializerOptions options = new(JsonSerializerDefaults.Web)
             {
                 ReferenceHandler = ReferenceHandler.Preserve,
                 WriteIndented = true
             };
-            var request = await _httpClient.PostAsJsonAsync("/api/bidding/CreateBid", createBidModel,options);
-            var Response = await request.Content.ReadAsStringAsync();
-            
+            var request = await _httpClient.PostAsJsonAsync("/api/bidding/CreateBid", createBidModel,options);          
+            return request.StatusCode.ToString();
+        }
+
+        public async Task<string> CreateCurrentValue(CurrentValue value)
+        {
+            JsonSerializerOptions options = new(JsonSerializerDefaults.Web)
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                WriteIndented = true
+            };
+            var request = await _httpClient.PostAsJsonAsync("/api/bidding/CreateCurrentValue", value, options);
+            return request.StatusCode.ToString();
         }
 
         public async Task<PlaceBidViewModel> CurrentValue(int prodId)

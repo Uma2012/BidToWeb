@@ -10,6 +10,7 @@ namespace ProductAPI.Repository
     {
         Task<List<Product>> GetAllProducts();
         List<ZeroRemaingDaysProduct> DayIncrementer();
-        //Task<List<Product>> ResettingDayCounter();
+        Product Create(Product product);
+        
     }
 }

@@ -42,5 +42,19 @@ namespace ProductAPI.Controllers
             return null;
         }
 
+        [HttpPost]
+        public ActionResult<int> Create([FromBody]Product product)
+        {
+           var createdProduct= _repository.Create(product);
+            if (createdProduct != null)
+            {                 
+                 return Ok(createdProduct.Id);
+               // return CreatedAtAction("GetProducts", new { id = product.Id }, product);
+            }
+            else
+                return BadRequest();
+
+        }
+
     }
 }

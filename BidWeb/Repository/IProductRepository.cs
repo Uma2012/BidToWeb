@@ -10,5 +10,6 @@ namespace BidWeb.Repository
     {
         Task<List<Products>> GetAll();
         Task<List<ZeroRemaningDaysProduct>> IncrementDay();
+        Task<int> CreateProduct(Products product);
     }
 }

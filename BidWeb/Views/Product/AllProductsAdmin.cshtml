@@ -1,70 +1,67 @@
 ﻿@model List<Products>
 
-@if (Model == null)
+<h4>Products -Admin</h4>
+
+@if (TempData["Message"] != null)
 {
-    <div class="loader"></div>
-}
-else
-{
-
-    <h4>Products -Admin</h4>
-
-    @if (TempData["Message"] != null)
-    {
-        <div class="alert alert-success" role="alert">
-            <p>@TempData["Message"]</p>              
-        </div>
-    }
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger " role="alert">
-            <p>@TempData["Error"]</p>            
-        </div>
-    }
-
-    <div style="margin-bottom:3rem; padding-left:3rem">
-        <a class="btn btn-info" asp-action="DayIncrementer" asp-controller="Product" onclick="showLoader(this)">Increment day +1</a>
+    <div class="alert alert-success" role="alert">
+        <p>@TempData["Message"]</p>
     </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger " role="alert">
+        <p>@TempData["Error"]</p>
+    </div>
+}
+
+<div style="margin-bottom:3rem; padding-left:3rem">
+    <span>
+        <a class="btn btn-info" asp-action="DayIncrementer" asp-controller="Product" onclick="showLoader(this)">Increment day +1</a>
+        <a class="btn btn-success" asp-action="CreateProduct" asp-controller="Product">Create Product</a>
+    </span>
+</div>
 
 
-    <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
-            {
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
 
 
-                <div class="col-lg-4 mb-5 d-flex justify-content-center">
-                    <div class="card shadow" style="width: 18rem;">
+            <div class="col-lg-4 mb-5 d-flex justify-content-center">
+                <div class="card shadow" style="width: 18rem;">
 
-                        <img class="card-img-top" style="height:200px;" src="@Url.Content("~/"+item.ImageUrl)" alt="@item.ProductName" />
+                    <img class="card-img-top" style="height:200px;" src="@Url.Content("~/"+item.ImageUrl)" alt="@item.ProductName" />
 
-                        <div class="card-body col text-center">
-                            <h5 class="card-title">@item.ProductName</h5>
-                            <p class="card-text">@item.BasePrice.ToString("C0")</p>
-                            <p class="card-text">Remaining days @item.RemainingDays </p>
-                            @if (item.IsSold)
-                            {
-                                <p class="card-text" style="color:red">Sold or Bid Ended </p>
-                            }
-                            <div>
-                                <a asp-action="GetBidValues" asp-controller="Bid" asp-route-id="@item.Id" class="btn btn-secondary">View Details</a>
-
-                            </div>
-                            <br />
-                            <br />
+                    <div class="card-body col text-center">
+                        <h5 class="card-title">@item.ProductName</h5>
+                        <p class="card-text">@item.BasePrice.ToString("C0")</p>
+                        <p class="card-text">Remaining days @item.RemainingDays </p>
+                        @if (item.IsSold)
+                        {
+                            <p class="card-text" style="color:red">Sold or Bid Ended </p>
+                        }
+                        <div>
+                            <a asp-action="GetBidValues" asp-controller="Bid" asp-route-id="@item.Id" class="btn btn-secondary">View Details</a>
 
                         </div>
+                        <br />
+                        <br />
+
                     </div>
                 </div>
+            </div>
 
-            }
-
-        </div>
-
+        }
 
     </div>
 
-}
+
+</div>
+
+
 
 <script>
     var showLoader = function () {

@@ -22,9 +22,14 @@ namespace BidWeb.Services
             return await _repository.BidValues(prodId);
         }
 
-        public async Task CreateBidPrice(CreateBidModel createBidModel)
+        public async Task<string> CreateBidPrice(CreateBidModel createBidModel)
         {
-             await _repository.CreateBid(createBidModel);
+            return await _repository.CreateBid(createBidModel);
+        }
+
+        public async Task<string> CreateCurrentValue(CurrentValue value)
+        {
+            return await _repository.CreateCurrentValue(value);
         }
 
         public async Task<PlaceBidViewModel> CurrentValue(int prodId)

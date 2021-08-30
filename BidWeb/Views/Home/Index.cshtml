@@ -2,14 +2,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center" style="width:100%;height:auto;">
-    <h5 >Welcome to Auction</h5>
+<div class="text-center" style="width:100%;height:auto; padding-top:5rem; color:darkcyan;font-family:cursive">
+    <h2 >Welcome to Auction</h2>
 
     <div style="padding:15rem;">
         @if (User.Identity.IsAuthenticated)
         {
-            <a asp-action="AllProducts" asp-controller="Product" class="btn btn-primary" onclick="showLoader(this)">See products</a>
-          
+            <a asp-action="AllProducts" asp-controller="Product" class="btn btn-primary" onclick="showLoader(this)">Enter</a>          
         }
 
         else

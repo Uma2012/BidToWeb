@@ -24,7 +24,7 @@ namespace BidWeb.Controllers
 
        [Authorize]
        [HttpGet("productid")]
-        public async Task<ActionResult<PlaceBidViewModel>> GetCurrentValue(int productid, double baseprice, string productname)
+        public async Task<ActionResult<PlaceBidViewModel>> GetCurrentValue(int productid, double baseprice, string productname,string img)
         {
             var placebid = new PlaceBidViewModel();
 
@@ -33,7 +33,8 @@ namespace BidWeb.Controllers
             placebid.BasePrice = baseprice;
             placebid.CurrentValue = output.CurrentValue;
             placebid.NoOfBidders = output.NoOfBidders;
-            placebid.ProductName = $"{productname}.jpg";
+            //placebid.ProductName = $"{productname}.jpg";
+            placebid.ProductName = img;
             placebid.ProdId = productid;            
           
             return View(placebid);
@@ -46,8 +47,11 @@ namespace BidWeb.Controllers
             var userId = _userManager.GetUserId(User);
             CreateBidModel createBidModel = new CreateBidModel() { UserId=Guid.Parse(userId), Prodid= ProdId, BidPrice=Convert.ToDouble(bidValue)};
 
-             await _bidService.CreateBidPrice(createBidModel);
+             var response=await _bidService.CreateBidPrice(createBidModel);
+            if(response=="OK")
             ViewBag.BidValue = bidValue;
+            else if (response == "BadRequest")
+            ViewBag.Error = "Bid not Created";
             return View();
         }
 

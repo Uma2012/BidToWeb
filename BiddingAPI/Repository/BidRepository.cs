@@ -28,20 +28,15 @@ namespace BiddingAPI.Repository
                 {
                     bool isCurrentPriceUpdated = UpdateCurrentPrice(createBid);
 
-                   if(isCurrentPriceUpdated)
-                    {
-                        return true;
-                    }
-                   else
-                    {
-                        return false;
-                    }
+                   if(isCurrentPriceUpdated)                    
+                        return true;                    
+                   else                    
+                        return false;                    
                 }
                 else
                 {
                     return false;
-                }
-               
+                }               
             }
             return false;
         }
@@ -160,17 +155,7 @@ namespace BiddingAPI.Repository
             var isProdIdExists = _context.Currentvalue.Any(x => x.ProdId == prodId);
             if (isProdIdExists)
             {
-                //var currentValueOfProduct = _context.Currentvalue.Where(y => y.ProdId == prodId).Select(x => x.CurrentPrice);
-               // var currentValueRow =_context.Currentvalue.Where(y => y.ProdId == prodId).Max();
-             //var query = _context.Currentvalue.GroupBy(s => s.ProdId)
-             //                                   .Select(s => new 
-             //                                   {
-             //                                   PRODID = s.Key,               
-             //                                   Maxi = s.Max(m => m.CurrentPrice)
-             //                                   })
-             //                                   .ToList();
-
-             //var requiredCurrentValue = query.Where(y=>y.PRODID==prodId).Select(x=>x.Maxi).FirstOrDefault();
+              
 
                 var query = _context.Currentvalue.GroupBy(s => s.ProdId)
                                                 .Select(s => new
@@ -180,7 +165,6 @@ namespace BiddingAPI.Repository
                                                 })
                                                 .Where(y=>y.PRODID==prodId).FirstOrDefault();
 
-                //var bidder = _context.Currentvalue.Where(p => p.ProdId == prodId).Count();
                 var isBidderExsits = _context.Aliases.Any(x => x.ProdId == prodId);
                 if (isBidderExsits)
                 {
@@ -190,15 +174,10 @@ namespace BiddingAPI.Repository
                 else
                 {
                     placebidModel.NoOfBidders = 0;
-                }
+                }                
 
-                
-
-                placebidModel.CurrentValue = query.Maxi;
-              
-
+                placebidModel.CurrentValue = query.Maxi;             
                 return placebidModel;
-
             }
 
             return null;
@@ -254,6 +233,21 @@ namespace BiddingAPI.Repository
 
             
             return query;
+        }
+
+        public bool CreateCurrentValue(CurrentValue value)
+        {
+            try
+            {
+                _context.Currentvalue.Add(value);
+                _context.SaveChanges();
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+           
         }
     }
 }
