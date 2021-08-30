@@ -1,0 +1,22 @@
+﻿
+
+
+@if (ViewBag.BidValue !=null)
+{
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>Your bid <b> @ViewBag.BidValue</b> Kr is successfully created</p>
+    <p>Highest bidder will get the product automatically when the bidding day ends.</p>
+    <hr>   
+  </div>
+}
+@if (ViewBag.Error !=null)
+{
+  <div class="alert alert-danger" role="alert">    
+   <p>@ViewBag.Error</p>
+  </div>
+}
+
+<div class="text-center">
+    <a class="btn btn-success" asp-action="AllProducts" asp-controller="Product"> Go to Products</a>
+</div>

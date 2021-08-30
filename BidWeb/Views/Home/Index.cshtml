@@ -2,7 +2,36 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center" style="width:100%;height:auto; padding-top:5rem; color:darkcyan;font-family:cursive">
+    <h2 >Welcome to Auction</h2>
+
+    <div style="padding:15rem;">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-action="AllProducts" asp-controller="Product" class="btn btn-primary" onclick="showLoader(this)">Enter</a>          
+        }
+
+        else
+        {
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login To View Products</a>
+        }
+    </div>
+    
 </div>
+<script>
+    var showLoader = function () {
+        $("<div />").css({
+            'position': 'fixed',
+            'left': 0,
+            'right': 0,
+            'bottom': 0,
+            'top': 0,
+            'background': '#0020ff36',
+            'z-index': '99',
+            'text-align': 'center'
+        }).appendTo($("body"))
+            .append(
+                $("<img />").attr("src", "https://mir-s3-cdn-cf.behance.net/project_modules/disp/35771931234507.564a1d2403b3a.gif")
+            );
+    }
+</script>

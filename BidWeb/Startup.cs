@@ -1,4 +1,7 @@
 using BidWeb.Data;
+using BidWeb.Models;
+using BidWeb.Repository;
+using BidWeb.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,8 +35,22 @@ namespace BidWeb
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<CustomUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddSingleton<IProductService, ProductService>();
+
+            services.AddSingleton<IBidService, BidService>();
+
+            services.AddSingleton<IOrderService, OrderService>();
+
+            services.AddHttpClient<IProductRepository, ProductRepository>(client => client.BaseAddress = new Uri(Configuration["ProductAPIURL"]));
+
+            services.AddHttpClient<IBidRepository, BidRepository>(client => client.BaseAddress = new Uri(Configuration["BiddingAPIURL"]));
+
+            services.AddHttpClient<IOrderRepository, OrderRepository>(client => client.BaseAddress = new Uri(Configuration["OrderAPIURL"]));
+
+
             services.AddControllersWithViews();
         }
 

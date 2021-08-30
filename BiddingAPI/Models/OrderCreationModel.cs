@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BiddingAPI.Models
+{
+    public class OrderCreationModel
+    {
+        public Guid UserId { get; set; }
+        public double ValueOfProduct { get; set; }
+    }
+}

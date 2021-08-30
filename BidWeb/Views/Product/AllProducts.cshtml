@@ -1,0 +1,47 @@
+﻿@model List<Products>
+
+
+    <h4> Products</h4>
+   
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    var remdays = @item.TodaysDate.Subtract(item.CreatedDate);
+                    
+
+                    <div class="col-lg-4 mb-5 d-flex justify-content-center">
+                        <div class="card shadow" style="width: 18rem;">
+
+                            <img class="card-img-top" style="height:200px;" src="@Url.Content("~/"+item.ImageUrl)" alt="@item.ProductName" />
+
+                            <div class="card-body col text-center">
+                                <h5 class="card-title">@item.ProductName</h5>
+
+                                <p class="card-text">Base price @item.BasePrice.ToString("C0")</p>                               
+                                <p class="card-text">Remaining days @item.RemainingDays</p>
+                                <div>
+                                    @if(item.RemainingDays==0)
+                                    {
+                                    <button type="button" class="btn btn-success" disabled>Bid Ends</button>
+                                    }
+                                    else
+                                    {
+                                    <a asp-action="GetCurrentValue" asp-controller="Bid" asp-route-productid="@item.Id" asp-route-baseprice="@item.BasePrice" asp-route-productname="@item.ProductName" asp-route-img="@item.ImageUrl" class="btn btn-success">Place Bid</a>
+                                    <a asp-action="GetBidValues" asp-controller="Bid" asp-route-id="@item.Id" class="btn btn-secondary">Bid Details</a>
+                                    }
+                                </div>
+                                <br />
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+
+
+        </div>
+
